@@ -1,4 +1,4 @@
-# Differen scripts on ANSI Common Lisp 
+## Different scripts on ANSI Common Lisp 
 
 Just some code I had fun with writing while learning the language.
 
