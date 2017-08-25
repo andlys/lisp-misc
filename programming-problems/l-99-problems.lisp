@@ -1,5 +1,5 @@
 ;;;; problems are taken from there:
-;;;; L-99_Ninety-Nine_Lisp_Problems.html
+;;;; http://www.ic.unicamp.br/~meidanis/courses/mc336/2006s2/funcional/L-99_Ninety-Nine_Lisp_Problems.html
 ;;;; in order to find a corresponding problem look for pN comment
 ;;;; where N is a number of the problem
 

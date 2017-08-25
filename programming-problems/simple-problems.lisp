@@ -14,7 +14,6 @@
         (format t "~D is prime~%" n)))
 
 ;;; Elementary ex 11
-;;; see this file: sppe11.png
 (defun sigma(func start end)
     (let ((total 0.0))
         (loop for k from start to end do
