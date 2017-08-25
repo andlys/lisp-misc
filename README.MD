@@ -4,5 +4,5 @@ Just some code I had fun with writing while learning the language.
 
 Folders:
 * interesting - may be worthy of attention
-* programming-problems
+* programming-problems - may be worthy of attention
 * basic - very basic and probably uninteresting
