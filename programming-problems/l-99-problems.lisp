@@ -7,11 +7,10 @@
 ;;; p01
 (defun my-last (lst)
     (if (null lst)
-        nil
-        (let ((nxt (cdr lst)))
-            (if (null nxt)
-                (car lst)
-                (my-last nxt)))))
+        nil)
+        (if (null (cdr lst))
+            (car lst)
+            (my-last (cdr lst))))
 (my-last nil)
 (my-last '(a))
 (my-last '(a b c d))
@@ -28,26 +27,24 @@
 (my-but-last '(a b c d))
 
 ;;; p03
-(defun element-at (lst i &optional curr)
-    (when (null curr) (setf curr 1))
+(defun element-at (lst i)
     (if (null lst)
         nil
-        (if (= i curr)
+        (if (= i 1)
             (car lst)
-            (element-at (cdr lst) i (+ curr 1)))))
+            (element-at (cdr lst) (1- i)))))
 
-(element-at nil 3) 
-(element-at '(a b c d e) 9) 
-(element-at '(a b c d e) 3) 
-(element-at '(a b c d e) 1) 
+(element-at nil 3)
+(element-at '(a b c d e) 9)
+(element-at '(a b c d e) 3)
+(element-at '(a b c d e) 1)
 (element-at '(a b c d e) 5)
 
 ;;; p04
-(defun my-length (lst &optional count)
-    (when (null count) (setf count 0))
+(defun my-length (lst)
     (if (null lst)
-        count
-        (my-length (cdr lst) (+ count 1))))
+        0
+        (1+ (my-length (cdr lst)))))
 
 (my-length nil)
 (my-length '())
@@ -56,16 +53,10 @@
 
 ;;; p05
 (defun my-reverse (lst)
-    (let ((new nil)
-          (tmp lst))
-        (loop
-            (when (null tmp) (return))
-            (setf new
-                    (cons (car tmp) new))
-            (setf tmp
-                    (cdr tmp)))
-        new))
-
+    (if lst
+        (append (list (my-last lst))
+                (my-reverse (butlast lst)))
+        nil))
 (my-reverse nil)
 (my-reverse '())
 (my-reverse '(a))
@@ -75,14 +66,13 @@
 
 ;;; p06
 (defun palindrome? (lst)
-    (let ((len (my-length lst)))
-        (do ((k 0 (+ k 1))
-             (m (- len 1) (- m 1)))
-            ((<= m k) t)
-            ;(format t "~D (~A) ~D (~A)~%" k (nth k lst) m (nth m lst))
-            (when (not (eql (nth k lst)
-                            (nth m lst)))
-                (return-from palindrome? nil)))))
+    (do ((k 0 (+ k 1))
+         (m (1- (my-length lst)) (1- m)))
+        ((<= m k) t)
+       ;(format t "~D (~A) ~D (~A)~%" k (nth k lst) m (nth m lst))
+       (when (not (eql (nth k lst)
+                       (nth m lst)))
+           (return-from palindrome? nil))))
 
 (palindrome? nil)
 (palindrome? '(a))
@@ -145,7 +135,7 @@
         (if (eql (car lst) (car tmp))
             (pack-helper (cdr lst)
                          (cons (car lst) tmp))
-            (append (list tmp) (pack-helper 
+            (append (list tmp) (pack-helper
                                 (cdr lst)
                                 (list (car lst)))))))
 
@@ -173,7 +163,7 @@
             (encode-helper (cdr lst)
                            (cons (car lst) tmp))
             (append (shorten tmp)
-                    (encode-helper 
+                    (encode-helper
                                 (cdr lst)
                                 (list (car lst)))))))
 
@@ -205,7 +195,7 @@
             (encode2-helper (cdr lst)
                            (cons (car lst) tmp))
             (append (shorten2 tmp)
-                    (encode2-helper 
+                    (encode2-helper
                                 (cdr lst)
                                 (list (car lst)))))))
 
