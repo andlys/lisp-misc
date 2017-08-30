@@ -2,7 +2,7 @@
 ;;; destructive function
 ;;; a b c - stacks
 ;;; n - number of first piles to move
-(defun move (a b c n) ; TODO
+(defun move (a b c n)
     (format t "~A ~A ~A ~%" a b c)
     (if (zerop n)
         (return-from move (values a b c)))
