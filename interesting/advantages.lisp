@@ -63,3 +63,31 @@
 
 ;; sum of all days in each month of a year
 (apply #'+ '(31 28 31 30 31 30 31 31 30 31 30 31)) ; => 365
+
+
+;; an excercise takes from paul graham's book
+;; closure technique used
+;; description: function that takes one number and returns the greatest number
+;; passed to it so far
+(let (lst)
+  (defun highest (n)
+    (reduce #'max (push n lst))))
+
+(highest 0)
+(highest 1)
+(highest -1)
+(highest 3)
+(highest 2)
+
+;; example of macro's usefulness 
+(defmacro iff (test then &optional else)
+  `(let ((val ,test))
+     (cond (val ,then)
+           (t ,else))))
+
+;; variable capture example
+;; value of test-expression is captured from macro
+;; this is impossible in other languages
+(iff (member 'd '(a b c d e f))
+     val
+     'nothing-found)
